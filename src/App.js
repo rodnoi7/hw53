@@ -1,28 +1,43 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import {Num} from './components/index';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    constructor() {
+        let numbers = [];
+        for (let i=0; i<5; i++) {
+            let random_number = Math.floor(Math.random()*(36-5+1)+5);
+            if (numbers.indexOf(random_number) === -1) {
+                numbers.push(random_number);
+            }
+            else {
+                i-=1;
+                continue;
+            }
+        }
+
+        numbers.sort(function(a,b){ 
+            return a-b;
+        });
+        super();
+
+        this.state = {random_numbers: numbers};
+
+    }
+
+    
+    render() {
+        return (
+        <div className='App'>
+            <Num 
+                num_1={this.state.random_numbers[0]} 
+                num_2={this.state.random_numbers[1]} 
+                num_3={this.state.random_numbers[2]} 
+                num_4={this.state.random_numbers[3]} 
+                num_5={this.state.random_numbers[4]} />
+        </div>
+        );
+   }
 }
 
 export default App;
